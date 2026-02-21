@@ -3,16 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simple Hangman</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 30px;
+        }
+        #wordDisplay {
+            font-size: 2em;
+            letter-spacing: 10px;
+            margin: 20px 0;
+        }
+        input {
+            font-size: 1em;
+            padding: 5px;
+            width: 50px;
+            text-align: center;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: red;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/profiles">Profiles</a></li>
-            </ul>
-        </nav>
-    </header>
+    <h1>Hangman Game</h1>
+    <p>Type a letter and press Enter to guess!</p>
+
+    <div id="wordDisplay"></div>
+    <input type="text" id="letterInput" maxlength="1">
+    <div id="message"></div>
+    <button id="restartBtn">Quit / Restart</button>
+
+    <script>
+        const words = ["javascript", "hangman", "game"];
+        let selectedWord;
+        let guessedLetters;
+        let wrongGuesses;
+        const maxWrong = 6;
+
+        const wordDisplay = document.getElementById("wordDisplay");
+        const input = document.getElementById("letterInput");
+        const message = document.getElementById("message");
+        const restartBtn = document.getElementById("restartBtn");
+
+        function startGame() {
+            selectedWord = words[Math.floor(Math.random() * words.length)];
+            guessedLetters = [];
+            wrongGuesses = 0;
+            input.disabled = false;
+            input.value = "";
+            message.textContent = "";
+            updateWordDisplay();
+        }
+
+        function updateWordDisplay() {
+            wordDisplay.textContent = selectedWord
+                .split("")
+                .map(letter => guessedLetters.includes(letter) ? letter : "_")
+                .join(" ");
+        }
+
+        function checkGame() {
+            if (selectedWord.split("").every(letter => guessedLetters.includes(letter))) {
+                message.textContent = "🎉 You Win!";
+                input.disabled = true;
+            } else if (wrongGuesses >= maxWrong) {
+                message.textContent = `☠️ You Lose! The word was "${selectedWord}".`;
+                wordDisplay.textContent = selectedWord.split("").join(" ");
+                input.disabled = true;
+            }
+        }
+
+        input.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                const letter = input.value.toLowerCase();
+                input.value = "";
+                if (letter && !guessedLetters.includes(letter)) {
+                    if (selectedWord.includes(letter)) {
+                        guessedLetters.push(letter);
+                    } else {
+                        wrongGuesses++;
+                    }
+                    updateWordDisplay();
+                    checkGame();
+                }
+            }
+        });
+
+        restartBtn.addEventListener("click", startGame);
+
+        // Start the first game
+        startGame();
+    </script>
 </body>
 </html>
