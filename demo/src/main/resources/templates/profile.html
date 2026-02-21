@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profiles">Profiles</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+    <section id="input-area">
+        <h3>Enter Your Player Name</h3>
+        <input type="text" id="name-input" placeholder="Enter name...">
+        <button onclick="saveName()">Update Profile</button>
+    </section>
+
+    <hr>
+
+    <section id="profile-display">
+        <p><strong>Name:</strong> <span id="display-name">Guest</span></p>
+        <p><strong>Achievements:</strong> None yet</p>
+        <p><strong>Average Amount of Time Per Word/Phrase:</strong> 0s</p>
+    </section>
+</body>
+</html>
