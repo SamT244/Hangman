@@ -23,7 +23,7 @@
 //         http
 
 //         .csrf(csrf -> csrf.disable());
-
+// // 
 //         .authorizeHTTPRequests(auth -> auth
 //             .requestMatchers("/guest/**").permitAll()
 //             .requestMatchers("/player/**").hasRole("PLAYER")

@@ -37,7 +37,14 @@
 <body>
     <h1>Hangman Game</h1>
     <p>Type a letter and press Enter to guess!</p>
-
+        <select id="words">
+        <option value="Hangman">Hangman</option>
+        <option value="Javascript">Javascript</option>
+        <option value="game">game</option>
+        </select>
+    <div>
+        <p>Wrong guesses: <span id="wrongGuesses">0</span></p>
+    </div>
     <div id="wordDisplay"></div>
     <input type="text" id="letterInput" maxlength="1">
     <div id="message"></div>
@@ -54,9 +61,16 @@
         const input = document.getElementById("letterInput");
         const message = document.getElementById("message");
         const restartBtn = document.getElementById("restartBtn");
+        const wordSelect = document.getElementById("words");
+        
+        const wrongGuessesDisplay = document.getElementById("wrongGuesses");
+
+        wordSelect.addEventListener("change", function() {
+            selectedWord = this.value.toLowerCase();
+            startGame();
+        });
 
         function startGame() {
-            selectedWord = words[Math.floor(Math.random() * words.length)];
             guessedLetters = [];
             wrongGuesses = 0;
             input.disabled = false;
@@ -74,9 +88,13 @@
 
         function checkGame() {
             if (selectedWord.split("").every(letter => guessedLetters.includes(letter))) {
+                wrongGuesses = 0;
+                wrongGuessesDisplay.textContent = wrongGuesses;
                 message.textContent = "🎉 You Win!";
                 input.disabled = true;
             } else if (wrongGuesses >= maxWrong) {
+                wrongGuesses = 0;
+                wrongGuessesDisplay.textContent = wrongGuesses;
                 message.textContent = `☠️ You Lose! The word was "${selectedWord}".`;
                 wordDisplay.textContent = selectedWord.split("").join(" ");
                 input.disabled = true;
@@ -84,6 +102,7 @@
         }
 
         input.addEventListener("keyup", function(event) {
+            
             if (event.key === "Enter") {
                 const letter = input.value.toLowerCase();
                 input.value = "";
@@ -92,11 +111,17 @@
                         guessedLetters.push(letter);
                     } else {
                         wrongGuesses++;
+                        wrongGuessesDisplay.textContent = wrongGuesses;
                     }
                     updateWordDisplay();
                     checkGame();
                 }
             }
+        });
+
+        wordSelect.addEventListener("change", function() {
+            selectedWord = this.value.toLowerCase();
+            startGame();
         });
 
         restartBtn.addEventListener("click", startGame);
