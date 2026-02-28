@@ -10,6 +10,11 @@ public class WebController {
         return "home";
     }
 
+    @GetMapping("/leaderboard")
+    public String leaderboard(Model model){
+        return "leaderboard";
+    }
+
     @GetMapping("/newGame")
     public String newGame(Model model){
         return "newGame";
@@ -22,6 +27,7 @@ public class WebController {
 
     @GetMapping("/profile")
     public String profile(Model model){
+
         return "profile";
     }
 }
