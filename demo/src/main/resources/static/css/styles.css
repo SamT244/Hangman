@@ -1,3 +1,6 @@
 nav {
-    color: blue;
+    display: flex;
+    align-items: center;
+    background-color: Navy;
+    padding: 10px;
 }

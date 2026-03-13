@@ -3,26 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>User Profile</title>
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-<<<<<<< HEAD
-                <img src="@{logo.jpg}" alt="Logo" width="50" height="50">
-
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/profile">Profile</a></li>
-            </ul>
-=======
-                <img th:src="@{logo.jpg}" alt="Logo" width="50" height="50">
+                <img th:src="@{/logo.jpg}" alt="Logo" width="50" height="50">
             </div>
                 <li><a href="/">Home</a></li>
                 <li><a href="/profile">Profiles</a></li>
->>>>>>> 4f7ebf386636bdddc7a5f66567759f5ef8ee0335
         </nav>
     </header>
 
@@ -41,13 +32,6 @@
         <p><strong>Average Amount of Time Per Word/Phrase:</strong> 0s</p>
     </section>
 
-    <style>
-        nav {
-            display: flex;
-            align-items: center;
-            background-color: Navy;
-            padding: 10px;
-        }
-    </style>
+
 </body>
 </html>
