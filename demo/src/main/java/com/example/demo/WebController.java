@@ -30,4 +30,9 @@ public class WebController {
 
         return "profile";
     }
+     @GetMapping("/admin")
+    public String admin(Model model){
+
+        return "admin";
+    }
 }

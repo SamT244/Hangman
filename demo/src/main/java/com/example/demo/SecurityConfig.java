@@ -20,6 +20,7 @@ class SecurityConfig {
                 auth.requestMatchers("/home", "/profile", "/leaderboard").permitAll();
                 auth.requestMatchers("/settings").hasRole("USER");
                 auth.requestMatchers("/admin").hasRole("ADMIN");
+                auth.anyRequest().hasAnyRole("ADMIN");
             }).formLogin(form -> form
                 .defaultSuccessUrl("/home"))
             .build();
